@@ -18,7 +18,7 @@
         <div class="row">
           <div class="col-md-8">
             <a href="index.php?page=acceuil">
-              <h1 id="titreMagasin" style="font-weight: 800;">Sorbet'</h1>
+              <h1 style="font-weight: 800;">Sorbet'</h1>
             </a>
           </div>
         </div>
@@ -76,7 +76,7 @@
     </div>
 
     <footer id="piedMagasin">
-      Algobreizh Copyright - 2018
+      Sorbet Copyright - 2018
     </footer>
   </div> <!-- #global -->
 </body>
