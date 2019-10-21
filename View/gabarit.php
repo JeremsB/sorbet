@@ -18,7 +18,7 @@
         <div class="row">
           <div class="col-md-8">
             <a href="index.php?page=acceuil">
-              <h1 style="font-weight: 800;">Sorbet'</h1>
+              <h1>Sorbet'</h1>
             </a>
           </div>
         </div>

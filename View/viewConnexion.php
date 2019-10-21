@@ -22,7 +22,7 @@
 
         </form>
 
-        <a href="index.php?action=register" rel="nofollow noopener noreferrer" style="text-decoration: underline;">Pas encore inscrit ?</a>
+        <a href="index.php?action=register" rel="nofollow noopener noreferrer">Pas encore inscrit ?</a>
     </div>
   </div>
 
