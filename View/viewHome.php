@@ -4,7 +4,6 @@
 
 
 <h3>C'est un test et ça marche!</h3>
-<img src="Content/img/pouce.jpg" alt="pouce">
 <?php $contenu = ob_get_clean();?> <!-- Stocke dans la variable $contenu -->
 
 <?php require "View/gabarit.php";?> <!-- Appelle le template du site -->
