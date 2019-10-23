@@ -22,7 +22,14 @@
       <input  class="btn btn-primary" type="submit" value="Connexion" />
     </form>
 
+<<<<<<< Updated upstream
     <a href="index.php?action=register" rel="nofollow noopener noreferrer">Pas encore inscrit ?</a>
+=======
+        </form>
+        <a href="index.php?action=register" rel="nofollow noopener noreferrer" style="text-decoration: underline;">Pas encore inscrit ?</a>
+        <img src="Content/img/pouce.jpg" alt="pouce" style="width: 100%">
+    </div>
+>>>>>>> Stashed changes
   </div>
 </div>
 
