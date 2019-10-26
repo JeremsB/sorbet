@@ -60,7 +60,7 @@
       <?= $contenu ?>
     </div>
     <div class="container">
-      <footer id="piedMagasin">
+      <footer>
         Sorbet Copyright - 2018
       </footer>
     </div>

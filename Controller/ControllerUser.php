@@ -13,35 +13,36 @@ class ControllerUser extends Model { //La classe hérite de Model pour récupér
         $this->client = new Client();
     }
 
-    public function inscription($login , $nom , $mail){
+    public function registeration($login, $lastname, $firstname, $birth, $color, $email, $password, $newsletter){
 
-        $existLogin = $this->client->loginExist($login); //Récupère le résultat de la fonction loginExist
-        $existMail = $this->client->mailExist($mail); //Pareil pour le mail
+        $existLogin = $this->user->loginExist($login); //Récupère le résultat de la fonction loginExist
+        $existEmail = $this->user->emailExist($email); //Pareil pour le mail
 
-        if($existLogin) { //Si la variable existLogin n'est pas vide (= code client est déjà utilisé), on affiche un message et on "redirige" vers la page d'inscription
-            $_SESSION['flash']['danger'] = "Un utilisateur avec ce code existe déjà" ;
-            header('Location:index.php?page=inscription');
+        if($existLogin) { //Si la variable existLogin n'est pas vide (= login déjà utilisé), on affiche un message et on "redirige" vers la page d'inscription
+            $_SESSION['flash']['danger'] = "Un utilisateur avec ce pseudo existe déjà" ;
+            header('Location:index.php?page=register');
         }
 
-        else if($existMail) { //Pareil pour le mail
-            $_SESSION['flash']['danger'] = "Un utilisateur avec cette adresse mail existe déjà" ;
-            header('Location:index.php?page=inscription');
+        else if($existEmail) { //Pareil pour le mail
+            $_SESSION['flash']['danger'] = "Un utilisateur avec cette adresse email existe déjà" ;
+            header('Location:index.php?page=register');
         }
 
         else {
             //On ajoute l'utilisateur dans la base de données
-            $this->client->ajoutClient($login, $nom, $mail, $pwd);
+            $password = $this->pwdHash($password);
+            $this->user->addUser($login, $lastname, $firstname, $birth, $color, $email, $password, $newsletter);
 
             //On redirige vers le formulaire de connexion
-            $_SESSION['flash']['success'] = "Inscription réussie ! Un mail vous a été envoyé avec votre mot de passe ($pwd)" ;
+            $_SESSION['flash']['success'] = "Inscription réussie! Bienvenue" ;
             header('Location:index.php?page=connexion');
 
-            // TODO le test d'inscription valide
-            //else {
+            // TODO try catch
+            /*
             $_SESSION['flash']['danger'] = "Une erreur s'est produite lors de l'inscription, veuillez réessayer plus tard" ;
-            header('Location:index.php?page=inscription');
-            ///}
-        } //ferme le 1er else
+            header('Location:index.php?page=register');
+            */
+        }
     }
 
     public function connexion($login, $pwd) {
@@ -68,6 +69,11 @@ class ControllerUser extends Model { //La classe hérite de Model pour récupér
         //Redirection vers l'accueil
         header('Location:index.php?page=home');
 
+    }
+
+    public function pwdHash($pwd) {
+        $pwd = sha1($pwd);
+        return $pwd;
     }
 
     //Créé les messages d'erreurs ou de succès pour session flash

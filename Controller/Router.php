@@ -71,14 +71,27 @@ class Routeur
             } else if (isset($_GET['action'])) {
 
                 if ($_GET['action'] == 'register') { //Inscription
-                    if (!empty($_POST['username']) and !empty($_POST['identifiant']) and !empty($_POST['nom'])) {
-                        $login = htmlspecialchars($this->getParametre($_POST, "identifiant"));
-                        $nom = htmlspecialchars($this->getParametre($_POST, "nom"));
-                        $mail = htmlspecialchars($this->getParametre($_POST, "mail"));
-                        $this->ctrlClient->inscription($login, $nom, $mail);
+                    if (!empty($_POST['login']) and !empty($_POST['lastname']) and !empty($_POST['firstname'])
+                        and !empty($_POST['birth']) and !empty($_POST['email']) and !empty($_POST['password'])
+                        and !empty($_POST['confPassword'])) {
+                        if ($_POST['password'] == $_POST['confPassword']) {
+                            $login = htmlspecialchars($this->getParametre($_POST, "login"));
+                            $lastname = htmlspecialchars($this->getParametre($_POST, "lastname"));
+                            $firstname = htmlspecialchars($this->getParametre($_POST, "firstname"));
+                            $birth = htmlspecialchars($this->getParametre($_POST, "birth"));
+                            $color = htmlspecialchars($this->getParametre($_POST, "color"));
+                            $email = htmlspecialchars($this->getParametre($_POST, "email"));
+                            $password = htmlspecialchars($this->getParametre($_POST, "password"));
+                            $newsletter = htmlspecialchars($this->getParametre($_POST, "newsletter"));
+                            $this->ctrlUser->registeration($login, $lastname, $firstname, $birth, $color, $email, $password, $newsletter);
+                            header('Location:index.php?page=home');
+                        } else {
+                            $_SESSION['flash']['danger'] = "Veuillez saisir deux mots de passes identiques";
+                            header('Location:index.php?page=register');
+                        }
                     } else {
                         $_SESSION['flash']['danger'] = "Veuillez remplir tous les champs";
-                        header('Location:index.php?page=inscription');
+                        header('Location:index.php?page=register');
                     }
                 } else if ($_GET["action"] == "connexion") { //Connexion
 
@@ -94,7 +107,7 @@ class Routeur
                     $this->redirect("index.php?page=connexion");
                 }
             } else {
-                require 'View/viewHome.php';
+                $this->redirect("index.php?page=home");
             }
 
         } catch
@@ -124,7 +137,6 @@ class Routeur
     //Fonction de redirection
     function redirect($url)
     {
-
         if (!headers_sent()) {
             header('Location: ' . $url);
             exit;
