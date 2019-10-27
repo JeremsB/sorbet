@@ -12,17 +12,17 @@
       <legend>Connexion</legend>
       <div class="form-group">
         <label for="exampleInputEmail1">Username :</label>
-        <input type="text" class="form-control" id="username" placeholder="Username">
+        <input type="text" class="form-control" id="username" name="username" placeholder="Username">
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1">Password :</label>
-        <input type="password" class="form-control" id="password" placeholder="Password">
+        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
         <small id="emailHelp" class="form-text text-muted">Please enter a password</small>
       </div>
       <input  class="btn btn-primary" type="submit" value="Connexion" />
     </form>
 
-    <a href="index.php?action=register" rel="nofollow noopener noreferrer">Pas encore inscrit ?</a>
+    <a href="index.php?page=register" rel="nofollow noopener noreferrer">Pas encore inscrit ?</a>
 
   </div>
 </div>

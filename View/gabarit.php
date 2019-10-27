@@ -46,6 +46,9 @@
                 <li class="nav-item">
                   <a class="nav-link" href="index.php?page=inscription">Inscription</a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="index.php?action=deconnexion">Déconnexion</a>
+                </li>
               </ul>
             </form>
           </div>
@@ -68,7 +71,7 @@
   </div> <!-- #global -->
 </body>
 
-<script src="Contenu/js/jquery-1.11.1.min.js"></script>
-<script src="Contenu/js/bootstrap.min.js"></script>
+<script src="Content/js/jquery-1.11.1.min.js"></script>
+<script src="Content/js/bootstrap.min.js"></script>
 
 </html>

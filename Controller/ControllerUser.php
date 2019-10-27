@@ -7,10 +7,10 @@ require_once 'Model/Model.php';
 
 class ControllerUser extends Model { //La classe hérite de Model pour récupérer la connexion a la bdd + l'exe des requêtes
 
-    private $client;
+    private $user;
 
     public function __construct() { //Construction de l'objet Client
-        $this->client = new Client();
+        $this->user = new User();
     }
 
     public function registeration($login, $lastname, $firstname, $birth, $color, $email, $password, $newsletter){
@@ -47,18 +47,23 @@ class ControllerUser extends Model { //La classe hérite de Model pour récupér
 
     public function connexion($login, $pwd) {
 
-        $requete = $this->client->infosClient($login, $pwd); //Récupère les informations de l'utilisateur en fonction de son username et de son mot de passe
-        $infos = $requete->fetchobject(); //Récupère sous forme d'objet
+        $pwd = $this->pwdHash($pwd);
+
+        $query = $this->user->infosUser($login, $pwd); //Récupère les informations de l'utilisateur en fonction de son username et de son mot de passe
+        $infos = $query->fetchobject(); //Récupère sous forme d'objet
 
         //Créé une session si les informations de l'utilisateur sont présentes dans la base de données
         if($infos) {
-            $_SESSION['user'] = ["id"  => $infos->user_id,
+            $_SESSION['user'] = ["id"  => $infos->id_user,
                 "login" => $infos->login,
-                "name" => $infos->name,
+                "lastname" => $infos->lastname,
                 "firstname" => $infos->firstname,
+                "birth" => $infos->birth,
+                "color" => $infos->color,
                 "email" => $infos->email,
                 "status" => $infos->status,
                 "picture" => $infos->picture,
+                "exp" => $infos->exp,
                 "profile" => $infos->profile,
                 "newsletter" => $infos->newsletter,
                 "notifications" => $infos->notifications];
@@ -67,7 +72,7 @@ class ControllerUser extends Model { //La classe hérite de Model pour récupér
         }
 
         //Redirection vers l'accueil
-        header('Location:index.php?page=home');
+        //header('Location:index.php?page=home');
 
     }
 

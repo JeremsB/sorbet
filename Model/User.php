@@ -38,7 +38,7 @@ class User extends Model { //La classe hérite de Model pour récupérer la conn
     //Récupère les informations pour la connexion de l'utilisateur
     public function infosUser($login, $pwd)
     {
-        $requete = 'SELECT * FROM t_user WHERE login=? AND pwd=?';
+        $requete = 'SELECT * FROM t_user WHERE login=? AND password=?';
         return $this->executerRequete($requete, array($login, $pwd));
     }
 

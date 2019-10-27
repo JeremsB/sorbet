@@ -45,8 +45,8 @@ class Routeur
                             require 'View/viewAdmin.php';
                         } else if ($_SESSION['user']['profile'] == "pro") { //Utilisateur = pro
                             require 'View/viewPro.php';
-                        } else { //Utilisateur = client
-                            $idClient = $_SESSION['user']['id'];
+                        } else if ($_SESSION['user']['profile'] == "user") { //Utilisateur = user
+                            //$idClient = $_SESSION['user']['id'];
                             require 'View/viewHome.php';
                         }
                     }
@@ -96,11 +96,12 @@ class Routeur
                 } else if ($_GET["action"] == "connexion") { //Connexion
 
                     if (!empty($_POST)) {
-
                         $login = $this->getParametre($_POST, "username");
-                        $pwd = md5($this->getParametre($_POST, "password"));
+                        $pwd = $this->getParametre($_POST, "password");
 
-                        $this->ctrlClient->connexion($login, $pwd);
+                        $this->ctrlUser->connexion($login, $pwd);
+                        $id_user = $_SESSION['user']['id'];
+                        $this->redirect("index.php?page=home&id_user=$id_user");
                     }
                 } else if ($_GET["action"] == "deconnexion") { //Déconnexion
                     session_destroy();
@@ -112,17 +113,19 @@ class Routeur
 
         } catch
         (Exception $e) {
-            $this->erreur($e->getMessage());
+            echo 'Exception reçue : ',  $e->getMessage(), "\n";
         }
 
     }
 
     // Affiche une erreur
+    /*
     private function erreur($msgErreur)
     {
-        $vue = new Vue("Erreur");
+        $vue = new View("Error");
         $vue->generer(array('msgErreur' => $msgErreur));
     }
+    */
 
     // Recherche un paramètre dans un tableau
     private function getParametre($tableau, $nom)
