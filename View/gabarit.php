@@ -63,7 +63,7 @@
       <?= $contenu ?>
     </div>
     <div class="container">
-      <footer>
+      <footer style="text-align: center">
         Sorbet Copyright - 2018
       </footer>
     </div>

@@ -81,6 +81,12 @@ class ControllerUser extends Model { //La classe hérite de Model pour récupér
         return $pwd;
     }
 
+    public function addXp($id_user, $xp) {
+        $xp_user = $this->user->getExp($id_user);
+        $xp_user = $xp_user + $xp;
+        $this->user->setExp($xp_user, $id_user);
+    }
+
     //Créé les messages d'erreurs ou de succès pour session flash
     public function displayAlert(){
 

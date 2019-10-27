@@ -42,4 +42,33 @@ class User extends Model { //La classe hérite de Model pour récupérer la conn
         return $this->executerRequete($requete, array($login, $pwd));
     }
 
+    //Récupère l'expérience de l'utilisateur
+    public function getExp($id)
+    {
+        $query = 'SELECT exp FROM t_user WHERE id_user = ?';
+        return $this->executerRequete($query, array($id));
+    }
+
+    //Modifie l'expérience de l'utilisateur
+    public function setExp($xp, $id)
+    {
+        $query = 'UPDATE t_user SET exp = ? WHERE id_user = ?';
+        return $this->executerRequete($query, array($xp, $id));
+    }
+
+    //Récupère la couleur de l'utilisateur
+    public function getColor($id)
+    {
+        $query = 'SELECT color FROM t_user WHERE id_user = ?';
+        return $this->executerRequete($query, array($id));
+    }
+
+    //Modifie la couleur de l'utilisateur
+    public function setColor($color, $id)
+    {
+        $query = 'UPDATE t_user SET color = ? WHERE id_user = ?';
+        return $this->executerRequete($query, array($color, $id));
+    }
+
+
 }
