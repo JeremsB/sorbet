@@ -13,29 +13,38 @@
 <body>
   <div id="global">
     <header>
-      <!-- Debut navbar -->
-      <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a href="index.php?page=accueil" class="navbar-brand">
-            <h1>Sorbet'</h1>
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+    <!-- Start Navbar -->
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a href="index.php?page=accueil" class="navbar-brand">
+          <h1>Sorbet'</h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.php?page=accueil">Accueil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.php?page=infos">Informations</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.php?action=magasin">Produits</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.php?page=panier">Panier</a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item">
-                <a class="nav-link" href="index.php?page=accueil">Accueil</a>
+                <a class="nav-link" href="index.php?page=connexion">Connexion</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="index.php?page=infos">Informations</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="index.php?action=magasin">Produits</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="index.php?page=panier">Panier</a>
+                <a class="nav-link" href="index.php?page=inscription">Inscription</a>
               </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
@@ -58,15 +67,19 @@
     </header>
 
     <br>
-
+    <!-- Start Content -->
     <div class="container">
       <?= $contenu ?>
     </div>
+    <!-- End Content -->
+
+    <!-- Start Footer -->
     <div class="container">
       <footer style="text-align: center">
         Sorbet Copyright - 2018
       </footer>
     </div>
+    <!-- End Footer -->
 
   </div> <!-- #global -->
 </body>
