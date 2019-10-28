@@ -13,75 +13,70 @@
 <body>
   <div id="global">
     <header>
-
+    <!-- Start Navbar -->
       <div class="container">
-        <div class="row">
-          <div class="col-md-8">
-            <a href="index.php?page=acceuil">
-              <h1 id="titreMagasin" style="font-weight: 800;">Sorbet'</h1>
-            </a>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a href="index.php?page=accueil" class="navbar-brand">
+            <h1>Sorbet'</h1>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="index.php?page=accueil">Accueil</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="index.php?page=infos">Informations</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="index.php?action=magasin">Produits</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="index.php?page=panier">Panier</a>
+              </li>
+            </ul>
+            
+            <form class="form-inline my-2 my-lg-0">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.php?page=connexion">Connexion</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="index.php?page=inscription">Inscription</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="index.php?action=deconnexion">Déconnexion</a>
+                </li>
+              </ul>
+            </form>
           </div>
-        </div>
+        </nav>
       </div>
-
-      <div class="container">
-        <div class="row">
-
-          <div class="col-md-2">
-            <a href="index.php?page=accueil">
-              <div class="menu">Accueil</div>
-            </a>
-          </div>
-
-          <div class="col-md-2">
-            <a href="index.php?page=infos">
-              <div class="menu">Informations</div>
-            </a>
-          </div>
-
-          <div class="col-md-2">
-            <a href="index.php?action=magasin">
-              <div class="menu">Produits</div>
-            </a>
-          </div>
-
-          <div class="col-md-2">
-            <a href="index.php?page=panier">
-              <div class="menu">Panier</div>
-            </a>
-          </div>
-
-          <div class="col-md-2">
-            <a href="index.php?page=connexion">
-              <div class="menu">Mon Compte</div>
-            </a>
-          </div>
-
-          <div class="col-md-2">
-            <a href="index.php?page=inscription">
-              <div class="menu">Inscription</div>
-            </a>
-          </div>
-
-        </div>
-      </div>
-
-
+      <!-- Fin navbar -->
     </header>
 
     <br>
-
-    <div id="contenu">
+    <!-- Start Content -->
+    <div class="container">
       <?= $contenu ?>
     </div>
+    <!-- End Content -->
 
-    <footer id="piedMagasin">
-      Algobreizh Copyright - 2018
-    </footer>
+    <!-- Start Footer -->
+    <div class="container">
+      <footer style="text-align: center">
+        Sorbet Copyright - 2018
+      </footer>
+    </div>
+    <!-- End Footer -->
+
   </div> <!-- #global -->
 </body>
 
-<script src="Contenu/js/jquery-1.11.1.min.js"></script>
-<script src="Contenu/js/bootstrap.min.js"></script>
+<script src="Content/js/jquery-1.11.1.min.js"></script>
+<script src="Content/js/bootstrap.min.js"></script>
 
 </html>

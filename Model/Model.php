@@ -37,7 +37,7 @@ abstract class Model {
     private function getBdd() {
         if ($this->bdd == null) {
             // Création de la connexion
-            $this->bdd = new PDO('mysql:host=localhost;dbname=festival;charset=utf8',
+            $this->bdd = new PDO('mysql:host=localhost;dbname=sorbet;charset=utf8',
                     "root", "",
                     array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
         }

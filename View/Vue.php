@@ -1,6 +1,6 @@
 <?php
 
-class Vue {
+class vVue {
 
     // Nom du fichier associé à la vue
     private $fichier;
