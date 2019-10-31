@@ -70,5 +70,38 @@ class User extends Model { //La classe hérite de Model pour récupérer la conn
         return $this->executerRequete($query, array($color, $id));
     }
 
+    //Récupère tous les utilisateurs
+    public function getOthers($id)
+    {
+        $query = 'SELECT * FROM t_user WHERE id_user != ?';
+        return $this->executerRequete($query, array($id));
+    }
+
+    //Ajoute un ami dans la base friend
+    public function addFriend($user_id, $target_id)
+    {
+        $query = "INSERT INTO t_friend (userA, target) VALUES (?,?)";
+        $this->executerRequete($query, array($user_id, $target_id));
+    }
+
+    //Vérifie si la relation existe dans un sens
+    public function checkFriendship1($user_id, $target_id)
+    {
+        $query = "SELECT * FROM t_friend WHERE userA = ? AND target = ?";
+        $friendShip1 = $this->executerRequete($query, array($user_id, $target_id));
+        $friendShip1 = $friendShip1->fetch();
+        return $friendShip1;
+    }
+
+    //Vérifie si la relation existe dans l'autre sens
+    public function checkFriendship2($user_id, $target_id)
+    {
+        $query = "SELECT * FROM t_friend WHERE userA = ? AND target = ?";
+        $friendShip2 = $this->executerRequete($query, array($target_id, $user_id));
+        $friendShip2 = $friendShip2->fetch();
+        return $friendShip2;
+    }
+
+
 
 }

@@ -87,6 +87,16 @@ class ControllerUser extends Model { //La classe hérite de Model pour récupér
         $this->user->setExp($xp_user, $id_user);
     }
 
+    public function getOtherUsers($id) {
+        return $this->user->getOthers($id);
+    }
+
+    public function addAsFriend($user_id, $target_id){
+        if (($this->user->checkFriendship1($user_id, $target_id) == null) && ($this->user->checkFriendship2($user_id, $target_id) == null)) {
+            $this->user->addFriend($user_id, $target_id);
+        }
+    }
+
     //Créé les messages d'erreurs ou de succès pour session flash
     public function displayAlert(){
 

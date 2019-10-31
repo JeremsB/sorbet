@@ -46,7 +46,8 @@ class Routeur
                         } else if ($_SESSION['user']['profile'] == "pro") { //Utilisateur = pro
                             require 'View/viewPro.php';
                         } else if ($_SESSION['user']['profile'] == "user") { //Utilisateur = user
-                            //$idClient = $_SESSION['user']['id'];
+                            $id_user = $_SESSION['user']['id'];
+                            $users = $this->ctrlUser->getOtherUsers($id_user);
                             require 'View/viewHome.php';
                         }
                     }
@@ -104,8 +105,16 @@ class Routeur
                         $this->redirect("index.php?page=home&id_user=$id_user");
                     }
                 } else if ($_GET["action"] == "deconnexion") { //Déconnexion
+
                     session_destroy();
                     $this->redirect("index.php?page=connexion");
+
+                } else if ($_GET["action"] == "addFriend") { //Envoie une demande d'ami
+
+                    $user_id = $_GET["id_user"];
+                    $target_id = $_GET["target_id"];
+                    $this->ctrlUser->addAsFriend($user_id, $target_id);
+                    $this->redirect("index.php?page=home&id_user=$user_id");
                 }
             } else {
                 $this->redirect("index.php?page=home");
