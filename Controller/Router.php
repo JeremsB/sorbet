@@ -32,24 +32,10 @@ class Routeur
                         unset($_SESSION['flash']);
                     } else {
                         if ($_SESSION['user']['profile'] == "admin") { //Utilisateur = admin
-                            /*
-                            $commandes = $this->ctrlCommande->getAllCommandesPasValideesTP();
-                            $detailsCommande = $this->ctrlCommande->getInfosCommandes();
-
-                            $codeClient = [];
-                            foreach ($commandes as $commande) {
-                                $donnee = $this->ctrlClient->getCodeClient($commande["co_id"]);
-                                $codeClient[$commande["co_id"]] = $donnee["cl_login"];
-                            }
-                            */
                             require 'View/viewAdmin.php';
                         } else if ($_SESSION['user']['profile'] == "pro") { //Utilisateur = pro
                             require 'View/viewPro.php';
                         } else if ($_SESSION['user']['profile'] == "user") { //Utilisateur = user
-                            $id_user = $_SESSION['user']['id'];
-                            $users = $this->ctrlUser->getOtherUsers($id_user, $id_user);
-                            $ask = $this->ctrlUser->getUserAskedFriends($id_user);
-                            $friends = $this->ctrlUser->getUserFriends($id_user);
                             require 'View/viewHome.php';
                         }
                     }
@@ -57,7 +43,7 @@ class Routeur
                     require 'View/viewRegister.php';
                 } else {
                     if (isset($_SESSION['user'])) {
-                        if ($_SESSION['user']['profile'] == "admin") { //Utilisateur = admin
+                        /*if ($_SESSION['user']['profile'] == "admin") { //Utilisateur = admin
                             $idUser = $_SESSION['user']['id'];
                             require 'View/viewAdmin.php';
                         } else if ($_SESSION['user']['profile'] == "pro") { //Utilisateur = pro
@@ -69,6 +55,17 @@ class Routeur
                             $ask = $this->ctrlUser->getUserAskedFriends($id_user);
                             $friends = $this->ctrlUser->getUserFriends($id_user);
                             require 'View/viewHome.php';
+                        }*/
+                        if ($_GET['page'] == 'friend') {
+                            $id_user = $_SESSION['user']['id'];
+                            $users = $this->ctrlUser->getOtherUsers($id_user, $id_user);
+                            $ask = $this->ctrlUser->getUserAskedFriends($id_user);
+                            $friends = $this->ctrlUser->getUserFriends($id_user);
+                            require 'View/viewFriend.php';
+                        } else if ($_GET['page'] == 'updateInfo') {
+                            require 'View/viewUpdateInfo.php';
+                        } else {
+                            header('Location:index.php?page=home');
                         }
                     } else {
                         require "View/viewConnexion.php";
@@ -120,6 +117,25 @@ class Routeur
                     $target_id = $_GET["target_id"];
                     $this->ctrlUser->addAsFriend($user_id, $target_id);
                     $this->redirect("index.php?page=home&id_user=$user_id");
+
+                } else if ($_GET["action"] == "updateInfo") { //Met à jour les infos de l'utilisateur
+                    if (!empty($_POST['login']) and !empty($_POST['lastname']) and !empty($_POST['firstname'])
+                        and !empty($_POST['birth']) and !empty($_POST['email'])) {
+                        $id = $_SESSION['user']['id'];
+                        $login = htmlspecialchars($this->getParametre($_POST, "login"));
+                        $lastname = htmlspecialchars($this->getParametre($_POST, "lastname"));
+                        $firstname = htmlspecialchars($this->getParametre($_POST, "firstname"));
+                        $birth = htmlspecialchars($this->getParametre($_POST, "birth"));
+                        $color = htmlspecialchars($this->getParametre($_POST, "color"));
+                        $email = htmlspecialchars($this->getParametre($_POST, "email"));
+                        $newsletter = htmlspecialchars($this->getParametre($_POST, "newsletter"));
+                        $this->ctrlUser->updateInfos($id, $login, $lastname, $firstname, $birth, $color, $email, $newsletter);
+                        header('Location:index.php?page=home');
+
+                    } else {
+                        $_SESSION['flash']['danger'] = "Veuillez remplir tous les champs";
+                        header('Location:index.php?page=updateInfo');
+                    }
                 } else {
                     if (isset($_SESSION['user'])) {
                         if ($_SESSION['user']['profile'] == "admin") { //Utilisateur = admin
@@ -130,9 +146,6 @@ class Routeur
                             require 'View/viewPro.php';
                         } else { //Utilisateur = client
                             $id_user = $_SESSION['user']['id'];
-                            $users = $this->ctrlUser->getOtherUsers($id_user, $id_user);
-                            $ask = $this->ctrlUser->getUserAskedFriends($id_user);
-                            $friends = $this->ctrlUser->getUserFriends($id_user);
                             require 'View/viewHome.php';
                         }
                     } else {

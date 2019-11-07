@@ -76,6 +76,17 @@ class ControllerUser extends Model { //La classe hérite de Model pour récupér
 
     }
 
+    public function updateInfos($id, $login, $lastname, $firstname, $birth, $color, $email, $newsletter) {
+        $this->user->update($id, $login, $lastname, $firstname, $birth, $color, $email, $newsletter);
+        $_SESSION['user']['login'] = $login;
+        $_SESSION['user']['lastname'] = $lastname;
+        $_SESSION['user']['firstname'] = $firstname;
+        $_SESSION['user']['birth'] = $birth;
+        $_SESSION['user']['color'] = $color;
+        $_SESSION['user']['email'] = $email;
+        $_SESSION['user']['newsletter'] = $newsletter;
+    }
+
     public function pwdHash($pwd) {
         $pwd = sha1($pwd);
         return $pwd;

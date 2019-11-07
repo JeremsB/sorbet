@@ -13,6 +13,11 @@ class User extends Model { //La classe hérite de Model pour récupérer la conn
 
     }
 
+    public function update($id, $login, $lastname, $firstname, $birth, $color, $email, $newsletter){
+        $query = "UPDATE t_user SET login = ?, lastname = ?, firstname = ?, birth = ?, color = ?, email = ?, newsletter = ? WHERE id_user = ?";
+        $this->executerRequete($query, array($login, $lastname, $firstname, $birth, $color, $email, $newsletter, $id)); //Execution de la requête
+    }
+
     //Vérifie si l'email existe déjà dans la base
     function emailExist($email)
     {
