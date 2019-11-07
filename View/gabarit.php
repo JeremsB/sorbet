@@ -45,7 +45,7 @@
                   <a class="nav-link" href="index.php?page=connexion">Connexion</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="index.php?page=inscription">Inscription</a>
+                  <a class="nav-link" href="index.php?page=register">Inscription</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="index.php?action=deconnexion">Déconnexion</a>

@@ -19,8 +19,49 @@ Vous êtes <?php echo $_SESSION['user']['firstname']; echo " ".$_SESSION['user']
         text-align: left;
     }
 </style>
+<?php if ($friends != null) { ?>
+<h3>Amis</h3>
+<table>
+    <tr>
+        <th scope="col">Photo</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Prénom</th>
+        <th scope="col">Birth</th>
+        <th scope="col">Email</th>
+    </tr>
+    <?php foreach ($friends as $user) {?>
+        <tr>
+            <td><img src="Content/img/<?php echo $user['picture'];?>" style="width: 35px; border: 2px solid <?php echo $user['color'];?>"></td>
+            <td><?php echo $user['lastname']; ?></td>
+            <td><?php echo $user['firstname']; ?></td>
+            <td><?php echo $user['birth']; ?></td>
+            <td><?php echo $user['email']; ?></td>
+        </tr>
+    <?php } ?>
+</table>
+<?php } ?>
 
+<h3>Demandes envoyées</h3>
+<table>
+    <tr>
+        <th scope="col">Photo</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Prénom</th>
+        <th scope="col">Birth</th>
+        <th scope="col">Email</th>
+    </tr>
+    <?php foreach ($ask as $user) {?>
+        <tr>
+            <td><img src="Content/img/<?php echo $user['picture'];?>" style="width: 35px; border: 2px solid <?php echo $user['color'];?>"></td>
+            <td><?php echo $user['lastname']; ?></td>
+            <td><?php echo $user['firstname']; ?></td>
+            <td><?php echo $user['birth']; ?></td>
+            <td><?php echo $user['email']; ?></td>
+        </tr>
+    <?php } ?>
+</table>
 
+<h3>Utilisateurs</h3>
 <table>
     <tr>
         <th scope="col">Photo</th>
@@ -37,6 +78,7 @@ Vous êtes <?php echo $_SESSION['user']['firstname']; echo " ".$_SESSION['user']
         <td><?php echo $user['firstname']; ?></td>
         <td><?php echo $user['birth']; ?></td>
         <td><?php echo $user['email']; ?></td>
+
         <td><a href="index.php?action=addFriend&id_user=<?php echo $_SESSION['user']['id'];?>&target_id=<?php echo $user['id_user'];?>">Ajouter</a></td>
     </tr>
     <?php } ?>

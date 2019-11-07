@@ -47,7 +47,9 @@ class Routeur
                             require 'View/viewPro.php';
                         } else if ($_SESSION['user']['profile'] == "user") { //Utilisateur = user
                             $id_user = $_SESSION['user']['id'];
-                            $users = $this->ctrlUser->getOtherUsers($id_user);
+                            $users = $this->ctrlUser->getOtherUsers($id_user, $id_user);
+                            $ask = $this->ctrlUser->getUserAskedFriends($id_user);
+                            $friends = $this->ctrlUser->getUserFriends($id_user);
                             require 'View/viewHome.php';
                         }
                     }
@@ -62,7 +64,10 @@ class Routeur
                             $idUser = $_SESSION['user']['id'];
                             require 'View/viewPro.php';
                         } else { //Utilisateur = client
-                            $idUser = $_SESSION['user']['id'];
+                            $id_user = $_SESSION['user']['id'];
+                            $users = $this->ctrlUser->getOtherUsers($id_user, $id_user);
+                            $ask = $this->ctrlUser->getUserAskedFriends($id_user);
+                            $friends = $this->ctrlUser->getUserFriends($id_user);
                             require 'View/viewHome.php';
                         }
                     } else {
@@ -115,6 +120,24 @@ class Routeur
                     $target_id = $_GET["target_id"];
                     $this->ctrlUser->addAsFriend($user_id, $target_id);
                     $this->redirect("index.php?page=home&id_user=$user_id");
+                } else {
+                    if (isset($_SESSION['user'])) {
+                        if ($_SESSION['user']['profile'] == "admin") { //Utilisateur = admin
+                            $idUser = $_SESSION['user']['id'];
+                            require 'View/viewAdmin.php';
+                        } else if ($_SESSION['user']['profile'] == "pro") { //Utilisateur = pro
+                            $idUser = $_SESSION['user']['id'];
+                            require 'View/viewPro.php';
+                        } else { //Utilisateur = client
+                            $id_user = $_SESSION['user']['id'];
+                            $users = $this->ctrlUser->getOtherUsers($id_user, $id_user);
+                            $ask = $this->ctrlUser->getUserAskedFriends($id_user);
+                            $friends = $this->ctrlUser->getUserFriends($id_user);
+                            require 'View/viewHome.php';
+                        }
+                    } else {
+                        require "View/viewConnexion.php";
+                    }
                 }
             } else {
                 $this->redirect("index.php?page=home");

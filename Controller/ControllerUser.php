@@ -87,8 +87,16 @@ class ControllerUser extends Model { //La classe hérite de Model pour récupér
         $this->user->setExp($xp_user, $id_user);
     }
 
-    public function getOtherUsers($id) {
-        return $this->user->getOthers($id);
+    public function getOtherUsers($id1, $id2) {
+        return $this->user->getOthers($id1, $id2);
+    }
+
+    public function getUserAskedFriends($id) {
+        return $this->user->getAsked($id);
+    }
+
+    public function getUserFriends($id) {
+        return $this->user->getFriends($id);
     }
 
     public function addAsFriend($user_id, $target_id){

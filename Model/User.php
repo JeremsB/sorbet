@@ -71,9 +71,24 @@ class User extends Model { //La classe hérite de Model pour récupérer la conn
     }
 
     //Récupère tous les utilisateurs
-    public function getOthers($id)
+    public function getOthers($id1, $id2)
     {
-        $query = 'SELECT * FROM t_user WHERE id_user != ?';
+        $query = 'SELECT * FROM t_user WHERE id_user != ? AND id_user NOT IN (SELECT target FROM t_friend WHERE userA = ?)';
+        return $this->executerRequete($query, array($id1, $id2));
+    }
+
+    //Récupère les demandes d'amis envoyées par l'utilisateur
+    public function getAsked($id)
+    {
+        $query = 'SELECT * FROM `t_user` WHERE id_user = (SELECT target FROM t_friend WHERE userA = ? AND accept = 0)';
+        return $this->executerRequete($query, array($id));
+    }
+
+
+    //Récupère les amis de l'utilisateur
+    public function getFriends($id)
+    {
+        $query = 'SELECT * FROM `t_user` WHERE id_user = (SELECT target FROM t_friend WHERE userA = ? AND accept = 1)';
         return $this->executerRequete($query, array($id));
     }
 
