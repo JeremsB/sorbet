@@ -29,7 +29,7 @@
                 <a class="nav-link" href="index.php?page=accueil">Accueil</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="index.php?page=infos">Informations</a>
+                <a class="nav-link" href="index.php?page=friend">Amis</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="index.php?action=magasin">Produits</a>

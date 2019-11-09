@@ -7,6 +7,12 @@
 <img src="Content/img/profile/default.png" style="width: 50px; border: 2px solid <?php echo $_SESSION['user']['color'];?>">
 Vous êtes <?php echo $_SESSION['user']['firstname']; echo " ".$_SESSION['user']['lastname'];?> et vous êtes né le <?php echo $_SESSION['user']['birth'];?> et j'ai pas formaté la date EXCELLENT
 
+<div class="col-md-3">
+    <a href="index.php?action=deleteUser">
+        <div>Supprimer compte</div>
+    </a>
+</div>
+
 <?php $contenu = ob_get_clean();?> <!-- Stocke dans la variable $contenu -->
 
 <?php require "View/gabarit.php";?> <!-- Appelle le template du site -->

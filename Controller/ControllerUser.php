@@ -87,6 +87,13 @@ class ControllerUser extends Model { //La classe hérite de Model pour récupér
         $_SESSION['user']['newsletter'] = $newsletter;
     }
 
+    public function deleteUser($id) {
+        $this->user->delete($id);
+        unset($_SESSION['user']);
+        $_SESSION['flash']['success'] = "Votre compte a bien été supprimé" ;
+        header('Location:index.php?page=connexion');
+    }
+
     public function pwdHash($pwd) {
         $pwd = sha1($pwd);
         return $pwd;
@@ -110,10 +117,19 @@ class ControllerUser extends Model { //La classe hérite de Model pour récupér
         return $this->user->getFriends($id);
     }
 
+    public function getUserFriendRequest($id) {
+        return $this->user->friendRequest($id);
+    }
+
     public function addAsFriend($user_id, $target_id){
         if (($this->user->checkFriendship1($user_id, $target_id) == null) && ($this->user->checkFriendship2($user_id, $target_id) == null)) {
             $this->user->addFriend($user_id, $target_id);
         }
+    }
+
+    public function acceptFriendship($userA, $target_id) {
+        $this->user->acceptFriend($userA, $target_id);
+        $this->user->mutual($target_id, $userA);
     }
 
     //Créé les messages d'erreurs ou de succès pour session flash

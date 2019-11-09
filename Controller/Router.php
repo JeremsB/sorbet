@@ -58,9 +58,10 @@ class Routeur
                         }*/
                         if ($_GET['page'] == 'friend') {
                             $id_user = $_SESSION['user']['id'];
-                            $users = $this->ctrlUser->getOtherUsers($id_user, $id_user);
-                            $ask = $this->ctrlUser->getUserAskedFriends($id_user);
-                            $friends = $this->ctrlUser->getUserFriends($id_user);
+                            $users = $this->ctrlUser->getOtherUsers($id_user, $id_user)->fetchAll();
+                            $ask = $this->ctrlUser->getUserAskedFriends($id_user)->fetchAll();
+                            $friends = $this->ctrlUser->getUserFriends($id_user)->fetchAll();
+                            $request = $this->ctrlUser->getUserFriendRequest($id_user)->fetchAll();
                             require 'View/viewFriend.php';
                         } else if ($_GET['page'] == 'updateInfo') {
                             require 'View/viewUpdateInfo.php';
@@ -111,12 +112,24 @@ class Routeur
                     session_destroy();
                     $this->redirect("index.php?page=connexion");
 
+                } else if ($_GET["action"] == "deleteUser"){
+
+                    $id = $_SESSION['user']['id'];
+                    $this->ctrlUser->deleteUser($id);
+
                 } else if ($_GET["action"] == "addFriend") { //Envoie une demande d'ami
 
                     $user_id = $_GET["id_user"];
                     $target_id = $_GET["target_id"];
                     $this->ctrlUser->addAsFriend($user_id, $target_id);
-                    $this->redirect("index.php?page=home&id_user=$user_id");
+                    $this->redirect("index.php?page=friend");
+
+                } else if ($_GET["action"] == "acceptRequest") { //Accepte la demande d'amis
+
+                    $id = $_SESSION['user']['id'];
+                    $ask_id = $_GET["ask_id"];
+                    $this->ctrlUser->acceptFriendship($ask_id, $id);
+                    header('Location:index.php?page=friend');
 
                 } else if ($_GET["action"] == "updateInfo") { //Met à jour les infos de l'utilisateur
                     if (!empty($_POST['login']) and !empty($_POST['lastname']) and !empty($_POST['firstname'])
