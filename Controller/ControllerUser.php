@@ -105,33 +105,6 @@ class ControllerUser extends Model { //La classe hérite de Model pour récupér
         $this->user->setExp($xp_user, $id_user);
     }
 
-    public function getOtherUsers($id1, $id2) {
-        return $this->user->getOthers($id1, $id2);
-    }
-
-    public function getUserAskedFriends($id) {
-        return $this->user->getAsked($id);
-    }
-
-    public function getUserFriends($id) {
-        return $this->user->getFriends($id);
-    }
-
-    public function getUserFriendRequest($id) {
-        return $this->user->friendRequest($id);
-    }
-
-    public function addAsFriend($user_id, $target_id){
-        if (($this->user->checkFriendship1($user_id, $target_id) == null) && ($this->user->checkFriendship2($user_id, $target_id) == null)) {
-            $this->user->addFriend($user_id, $target_id);
-        }
-    }
-
-    public function acceptFriendship($userA, $target_id) {
-        $this->user->acceptFriend($userA, $target_id);
-        $this->user->mutual($target_id, $userA);
-    }
-
     //Créé les messages d'erreurs ou de succès pour session flash
     public function displayAlert(){
 

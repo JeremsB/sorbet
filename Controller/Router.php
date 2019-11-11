@@ -1,21 +1,20 @@
 <?php
 
-
-require_once 'Controller/ControllerClient.php';
 require_once 'Controller/ControllerUser.php';
+require_once 'Controller/ControllerFriend.php';
 require_once 'View/Vue.php';
 
 class Routeur
 {
 
-    private $ctrlClient;
     private $ctrlUser;
+    private $ctrlFriend;
 
 
     public function __construct()
     {
-        $this->ctrlClient = new ControllerClient();
         $this->ctrlUser = new ControllerUser();
+        $this->ctrlFriend = new ControllerFriend();
     }
 
     // Route une requête entrante : exécute l'action associée
@@ -58,10 +57,10 @@ class Routeur
                         }*/
                         if ($_GET['page'] == 'friend') {
                             $id_user = $_SESSION['user']['id'];
-                            $users = $this->ctrlUser->getOtherUsers($id_user, $id_user)->fetchAll();
-                            $ask = $this->ctrlUser->getUserAskedFriends($id_user)->fetchAll();
-                            $friends = $this->ctrlUser->getUserFriends($id_user)->fetchAll();
-                            $request = $this->ctrlUser->getUserFriendRequest($id_user)->fetchAll();
+                            $users = $this->ctrlFriend->getOtherUsers($id_user, $id_user)->fetchAll();
+                            $ask = $this->ctrlFriend->getUserAskedFriends($id_user)->fetchAll();
+                            $friends = $this->ctrlFriend->getUserFriends($id_user)->fetchAll();
+                            $request = $this->ctrlFriend->getUserFriendRequest($id_user)->fetchAll();
                             require 'View/viewFriend.php';
                         } else if ($_GET['page'] == 'updateInfo') {
                             require 'View/viewUpdateInfo.php';
@@ -121,14 +120,35 @@ class Routeur
 
                     $user_id = $_GET["id_user"];
                     $target_id = $_GET["target_id"];
-                    $this->ctrlUser->addAsFriend($user_id, $target_id);
+                    $this->ctrlFriend->addAsFriend($user_id, $target_id);
                     $this->redirect("index.php?page=friend");
 
                 } else if ($_GET["action"] == "acceptRequest") { //Accepte la demande d'amis
 
                     $id = $_SESSION['user']['id'];
                     $ask_id = $_GET["ask_id"];
-                    $this->ctrlUser->acceptFriendship($ask_id, $id);
+                    $this->ctrlFriend->acceptFriendship($ask_id, $id);
+                    header('Location:index.php?page=friend');
+
+                } else if ($_GET["action"] == "deleteFriend") { //Supprimer ami
+
+                    $id1 = $_SESSION['user']['id'];
+                    $id2 = $_GET["id"];
+                    $this->ctrlFriend->deleteFriendship($id1, $id2);
+                    header('Location:index.php?page=friend');
+
+                } else if ($_GET["action"] == "refuseRequest") { //Accepte la demande d'amis
+
+                    $id = $_SESSION['user']['id'];
+                    $ask_id = $_GET["ask_id"];
+                    $this->ctrlFriend->refuseRequest($ask_id, $id);
+                    header('Location:index.php?page=friend');
+
+                } else if ($_GET["action"] == "cancelAsk") { //Accepte la demande d'amis
+
+                    $id = $_SESSION['user']['id'];
+                    $ask_id = $_GET["ask_id"];
+                    $this->ctrlFriend->cancelAsk($id, $ask_id);
                     header('Location:index.php?page=friend');
 
                 } else if ($_GET["action"] == "updateInfo") { //Met à jour les infos de l'utilisateur

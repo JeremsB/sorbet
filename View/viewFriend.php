@@ -31,6 +31,7 @@ Vous êtes <?php echo $_SESSION['user']['firstname']; echo " ".$_SESSION['user']
             <th scope="col">Prénom</th>
             <th scope="col">Birth</th>
             <th scope="col">Email</th>
+            <th scope="col">Supprimer</th>
         </tr>
         <?php foreach ($friends as $user) {?>
             <tr>
@@ -39,6 +40,7 @@ Vous êtes <?php echo $_SESSION['user']['firstname']; echo " ".$_SESSION['user']
                 <td><?php echo $user['firstname']; ?></td>
                 <td><?php echo $user['birth']; ?></td>
                 <td><?php echo $user['email']; ?></td>
+                <td><a href="index.php?action=deleteFriend&id=<?php echo $user['id_user'];?>">Supprimer</a></td>
             </tr>
         <?php } ?>
     </table>
@@ -54,6 +56,7 @@ Vous êtes <?php echo $_SESSION['user']['firstname']; echo " ".$_SESSION['user']
         <th scope="col">Birth</th>
         <th scope="col">Email</th>
         <th scope="col">Accepter</th>
+        <th scope="col">Refuser</th>
     </tr>
     <?php foreach ($request as $user) {?>
         <tr>
@@ -63,6 +66,7 @@ Vous êtes <?php echo $_SESSION['user']['firstname']; echo " ".$_SESSION['user']
             <td><?php echo $user['birth']; ?></td>
             <td><?php echo $user['email']; ?></td>
             <td><a href="index.php?action=acceptRequest&ask_id=<?php echo $user['id_user'];?>">Accepter</a></td>
+            <td><a href="index.php?action=refuseRequest&ask_id=<?php echo $user['id_user'];?>">Refuser</a></td>
         </tr>
     <?php } ?>
 </table>
@@ -77,6 +81,7 @@ Vous êtes <?php echo $_SESSION['user']['firstname']; echo " ".$_SESSION['user']
         <th scope="col">Prénom</th>
         <th scope="col">Birth</th>
         <th scope="col">Email</th>
+        <th scope="col">Annuler</th>
     </tr>
     <?php foreach ($ask as $user) {?>
         <tr>
@@ -85,6 +90,7 @@ Vous êtes <?php echo $_SESSION['user']['firstname']; echo " ".$_SESSION['user']
             <td><?php echo $user['firstname']; ?></td>
             <td><?php echo $user['birth']; ?></td>
             <td><?php echo $user['email']; ?></td>
+            <td><a href="index.php?action=cancelAsk&ask_id=<?php echo $user['id_user'];?>">Annuler</a></td>
         </tr>
     <?php } ?>
 </table>
