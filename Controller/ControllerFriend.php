@@ -9,7 +9,7 @@ class ControllerFriend extends Model { //La classe hérite de Model pour récup�
 
     private $friend;
 
-    public function __construct() { //Construction de l'objet Client
+    public function __construct() { //Construction de l'objet Friend
         $this->friend = new Friend();
     }
 
@@ -51,6 +51,11 @@ class ControllerFriend extends Model { //La classe hérite de Model pour récup�
 
     public function cancelAsk($id1, $id2) {
         $this->friend->delete($id1, $id2);
+    }
+
+    public function friendNumber($id) {
+        $test = $this->friend->number($id)->fetch();
+        return $test[0];
     }
 
     //Créé les messages d'erreurs ou de succès pour session flash

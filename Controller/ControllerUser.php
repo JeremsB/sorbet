@@ -9,7 +9,7 @@ class ControllerUser extends Model { //La classe hérite de Model pour récupér
 
     private $user;
 
-    public function __construct() { //Construction de l'objet Client
+    public function __construct() { //Construction de l'objet User
         $this->user = new User();
     }
 

@@ -1,5 +1,6 @@
 <title>Sorbet' - Inscription</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <meta charset="utf-8">
 
 
@@ -62,6 +63,23 @@
     </div>
 </div>
 
+<script>
+    $(function(){
+        var dtToday = new Date();
+
+        var month = dtToday.getMonth() + 1;// jan=0; feb=1 .......
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear() - 18;
+        if(month < 10)
+            month = '0' + month.toString();
+        if(day < 10)
+            day = '0' + day.toString();
+        var minDate = year + '-' + month + '-' + day;
+        var maxDate = year + '-' + month + '-' + day;
+        $('#birth').attr('max', maxDate);
+    });
+</script>
+
 <?php $contenu = ob_get_clean(); ?>
 
-<?php //require "View/gabarit.php"; ?>
+<?php require "View/gabarit.php"; ?>

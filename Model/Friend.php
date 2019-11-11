@@ -72,4 +72,9 @@ class Friend extends Model { //La classe hérite de Model pour récupérer la co
         $this->executerRequete($query, array($userA, $target_id));
     }
 
+    public function number($id) {
+        $query = "SELECT COUNT(id_friend) FROM `t_friend` WHERE userA = ? AND accept = 1";
+        return $this->executerRequete($query, array($id));
+    }
+
 }

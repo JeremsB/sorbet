@@ -2,6 +2,7 @@
 
 require_once 'Controller/ControllerUser.php';
 require_once 'Controller/ControllerFriend.php';
+require_once 'Controller/ControllerBet.php';
 require_once 'View/Vue.php';
 
 class Routeur
@@ -9,12 +10,13 @@ class Routeur
 
     private $ctrlUser;
     private $ctrlFriend;
-
+    private $ctrlBet;
 
     public function __construct()
     {
         $this->ctrlUser = new ControllerUser();
         $this->ctrlFriend = new ControllerFriend();
+        $this->ctrlBet = new ControllerBet();
     }
 
     // Route une requête entrante : exécute l'action associée
@@ -40,27 +42,17 @@ class Routeur
                     }
                 } else if ($_GET['page'] == 'register') {
                     require 'View/viewRegister.php';
+                } else if ($_GET['page'] == 'bet') {
+                    require 'View/viewBet.php';
                 } else {
                     if (isset($_SESSION['user'])) {
-                        /*if ($_SESSION['user']['profile'] == "admin") { //Utilisateur = admin
-                            $idUser = $_SESSION['user']['id'];
-                            require 'View/viewAdmin.php';
-                        } else if ($_SESSION['user']['profile'] == "pro") { //Utilisateur = pro
-                            $idUser = $_SESSION['user']['id'];
-                            require 'View/viewPro.php';
-                        } else { //Utilisateur = client
-                            $id_user = $_SESSION['user']['id'];
-                            $users = $this->ctrlUser->getOtherUsers($id_user, $id_user);
-                            $ask = $this->ctrlUser->getUserAskedFriends($id_user);
-                            $friends = $this->ctrlUser->getUserFriends($id_user);
-                            require 'View/viewHome.php';
-                        }*/
                         if ($_GET['page'] == 'friend') {
                             $id_user = $_SESSION['user']['id'];
                             $users = $this->ctrlFriend->getOtherUsers($id_user, $id_user)->fetchAll();
                             $ask = $this->ctrlFriend->getUserAskedFriends($id_user)->fetchAll();
                             $friends = $this->ctrlFriend->getUserFriends($id_user)->fetchAll();
                             $request = $this->ctrlFriend->getUserFriendRequest($id_user)->fetchAll();
+                            $friendNumber = $this->ctrlFriend->friendNumber($id_user);
                             require 'View/viewFriend.php';
                         } else if ($_GET['page'] == 'updateInfo') {
                             require 'View/viewUpdateInfo.php';

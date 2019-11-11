@@ -6,6 +6,7 @@
 <h4>Bienvenue <?php echo $_SESSION['user']['login']; ?> ! Votre couleur est <span style="color: <?php echo $_SESSION['user']['color'];?>">celle-ci</span></h4>
 <img src="Content/img/profile/default.png" style="width: 50px; border: 2px solid <?php echo $_SESSION['user']['color'];?>">
 Vous êtes <?php echo $_SESSION['user']['firstname']; echo " ".$_SESSION['user']['lastname'];?> et vous êtes né le <?php echo $_SESSION['user']['birth'];?> et j'ai pas formaté la date EXCELLENT
+<h3>Vous avez <?php echo $friendNumber; if ($friendNumber == 0 || $friendNumber == 1) { echo " ami";} else { echo " amis"; }?></h3>
 
 <style>
     table {
