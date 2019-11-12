@@ -12,10 +12,10 @@ class Friend extends Model { //La classe hérite de Model pour récupérer la co
     }
 
     //Récupère tous autres les utilisateurs hors amis
-    public function getOthers($id1, $id2)
+    public function getOthers($id1, $id2, $id3)
     {
-        $query = 'SELECT * FROM t_user WHERE id_user != ? AND id_user NOT IN (SELECT target FROM t_friend WHERE userA = ?)';
-        return $this->executerRequete($query, array($id1, $id2));
+        $query = 'SELECT * FROM t_user WHERE id_user != ? AND id_user NOT IN (SELECT target FROM t_friend WHERE userA = ?) AND id_user NOT IN (SELECT userA FROM t_friend WHERE target = ? AND accept = 0)';
+        return $this->executerRequete($query, array($id1, $id2, $id3));
     }
 
     //Récupère les demandes d'amis envoyées (non répondues) par l'utilisateur

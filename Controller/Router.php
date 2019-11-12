@@ -48,7 +48,7 @@ class Routeur
                     if (isset($_SESSION['user'])) {
                         if ($_GET['page'] == 'friend') {
                             $id_user = $_SESSION['user']['id'];
-                            $users = $this->ctrlFriend->getOtherUsers($id_user, $id_user)->fetchAll();
+                            $users = $this->ctrlFriend->getOtherUsers($id_user, $id_user, $id_user)->fetchAll();
                             $ask = $this->ctrlFriend->getUserAskedFriends($id_user)->fetchAll();
                             $friends = $this->ctrlFriend->getUserFriends($id_user)->fetchAll();
                             $request = $this->ctrlFriend->getUserFriendRequest($id_user)->fetchAll();

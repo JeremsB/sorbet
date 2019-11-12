@@ -13,8 +13,8 @@ class ControllerFriend extends Model { //La classe hérite de Model pour récup�
         $this->friend = new Friend();
     }
 
-    public function getOtherUsers($id1, $id2) {
-        return $this->friend->getOthers($id1, $id2);
+    public function getOtherUsers($id1, $id2, $id3) {
+        return $this->friend->getOthers($id1, $id2, $id3);
     }
 
     public function getUserAskedFriends($id) {
