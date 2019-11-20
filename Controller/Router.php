@@ -53,6 +53,7 @@ class Routeur
                             $friends = $this->ctrlFriend->getUserFriends($id_user)->fetchAll();
                             $request = $this->ctrlFriend->getUserFriendRequest($id_user)->fetchAll();
                             $friendNumber = $this->ctrlFriend->friendNumber($id_user);
+
                             require 'View/viewFriend.php';
                         } else if ($_GET['page'] == 'updateInfo') {
                             require 'View/viewUpdateInfo.php';

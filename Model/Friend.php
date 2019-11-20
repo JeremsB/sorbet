@@ -77,4 +77,5 @@ class Friend extends Model { //La classe hérite de Model pour récupérer la co
         return $this->executerRequete($query, array($id));
     }
 
+
 }

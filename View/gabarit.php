@@ -68,7 +68,7 @@
     <!-- Start Footer -->
     <div class="container">
       <footer style="text-align: center">
-        Sorbet Copyright - 2018
+        Sorbet Copyright - 2019
       </footer>
     </div>
     <!-- End Footer -->
